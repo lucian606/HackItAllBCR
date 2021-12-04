@@ -1,9 +1,37 @@
+import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_datastore/amplify_datastore.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+
+import 'amplifyconfiguration.dart';
+import 'models/ModelProvider.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
+void doSomething() async {
+  AmplifyAPI apiPlugin = AmplifyAPI();
+  AmplifyDataStore datastorePlugin = AmplifyDataStore(
+    modelProvider: ModelProvider.instance,
+  );
+  // AmplifyStorageS3 amplifyStorageS3 = AmplifyStorageS3();
+  Amplify.addPlugins([
+    datastorePlugin,
+    // amplifyStorageS3,
+    apiPlugin,
+  ]);
+  // Once Plugins are added, configure Amplify
+  // Note: Amplify can only be configured once.
+  try {
+    await Amplify.configure(amplifyconfig);
+  } catch (e) {
+    print(
+        "Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
+  }
+  final item = UntitledModel(
+      isComplete: false);
+  await Amplify.DataStore.save(item);
+}
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -25,6 +53,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
     );
   }
 }
@@ -49,8 +78,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
   void _incrementCounter() {
+    doSomething();
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
