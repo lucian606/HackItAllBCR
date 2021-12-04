@@ -1,27 +1,6 @@
-type StockModelCDGP @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  companyName: String
-  value: Float
-  date: AWSDate
-  companymodelcdgpID: ID @index(name: "byCompanyModelCDGP")
-}
-
 type CompanyModelCDGP @model @auth(rules: [{allow: public}]) {
   id: ID!
-  name: String
   value: Float
-  StockModelCDGPS: [StockModelCDGP] @hasMany(indexName: "byCompanyModelCDGP", fields: ["id"])
-}
-
-type StockValue {
-  price: Float
-  date: AWSDate
-}
-
-type CompanyModel @model @auth(rules: [{allow: public}]) {
-  id: ID!
   name: String
-  currency: String
-  ceEchipaSunteti: String
 }
  

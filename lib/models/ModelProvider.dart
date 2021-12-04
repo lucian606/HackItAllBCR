@@ -20,36 +20,23 @@
 // ignore_for_file: public_member_api_docs, file_names, unnecessary_new, prefer_if_null_operators, prefer_const_constructors, slash_for_doc_comments, annotate_overrides, non_constant_identifier_names, unnecessary_string_interpolations, prefer_adjacent_string_concatenation, unnecessary_const, dead_code
 
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
-import 'CompanyModel.dart';
 import 'CompanyModelCDGP.dart';
-import 'StockModelCDGP.dart';
-import 'package:http/http.dart';
 
-export 'CompanyModel.dart';
 export 'CompanyModelCDGP.dart';
-export 'StockModelCDGP.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "14ace5d922f182558a19e540a570ea15";
+  String version = "c8f9a6b6e2b1049105abeb218b3593b5";
   @override
-  List<ModelSchema> modelSchemas = [CompanyModel.schema, CompanyModelCDGP.schema, StockModelCDGP.schema];
+  List<ModelSchema> modelSchemas = [CompanyModelCDGP.schema];
   static final ModelProvider _instance = ModelProvider();
 
   static ModelProvider get instance => _instance;
   
   ModelType getModelTypeByModelName(String modelName) {
     switch(modelName) {
-    case "CompanyModel": {
-    return CompanyModel.classType;
-    }
-    break;
     case "CompanyModelCDGP": {
     return CompanyModelCDGP.classType;
-    }
-    break;
-    case "StockModelCDGP": {
-    return StockModelCDGP.classType;
     }
     break;
     default: {

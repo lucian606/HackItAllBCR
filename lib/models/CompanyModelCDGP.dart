@@ -19,9 +19,7 @@
 
 // ignore_for_file: public_member_api_docs, file_names, unnecessary_new, prefer_if_null_operators, prefer_const_constructors, slash_for_doc_comments, annotate_overrides, non_constant_identifier_names, unnecessary_string_interpolations, prefer_adjacent_string_concatenation, unnecessary_const, dead_code
 
-import 'ModelProvider.dart';
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 
@@ -30,9 +28,8 @@ import 'package:flutter/foundation.dart';
 class CompanyModelCDGP extends Model {
   static const classType = const _CompanyModelCDGPModelType();
   final String id;
-  final String? _name;
   final double? _value;
-  final List<StockModelCDGP>? _StockModelCDGPS;
+  final String? _name;
 
   @override
   getInstanceType() => classType;
@@ -42,26 +39,21 @@ class CompanyModelCDGP extends Model {
     return id;
   }
   
-  String? get name {
-    return _name;
-  }
-  
   double? get value {
     return _value;
   }
   
-  List<StockModelCDGP>? get StockModelCDGPS {
-    return _StockModelCDGPS;
+  String? get name {
+    return _name;
   }
   
-  const CompanyModelCDGP._internal({required this.id, name, value, StockModelCDGPS}): _name = name, _value = value, _StockModelCDGPS = StockModelCDGPS;
+  const CompanyModelCDGP._internal({required this.id, value, name}): _value = value, _name = name;
   
-  factory CompanyModelCDGP({String? id, String? name, double? value, List<StockModelCDGP>? StockModelCDGPS}) {
+  factory CompanyModelCDGP({String? id, double? value, String? name}) {
     return CompanyModelCDGP._internal(
       id: id == null ? UUID.getUUID() : id,
-      name: name,
       value: value,
-      StockModelCDGPS: StockModelCDGPS != null ? List<StockModelCDGP>.unmodifiable(StockModelCDGPS) : StockModelCDGPS);
+      name: name);
   }
   
   bool equals(Object other) {
@@ -73,9 +65,8 @@ class CompanyModelCDGP extends Model {
     if (identical(other, this)) return true;
     return other is CompanyModelCDGP &&
       id == other.id &&
-      _name == other._name &&
       _value == other._value &&
-      DeepCollectionEquality().equals(_StockModelCDGPS, other._StockModelCDGPS);
+      _name == other._name;
   }
   
   @override
@@ -87,42 +78,32 @@ class CompanyModelCDGP extends Model {
     
     buffer.write("CompanyModelCDGP {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("name=" + "$_name" + ", ");
-    buffer.write("value=" + (_value != null ? _value!.toString() : "null"));
+    buffer.write("value=" + (_value != null ? _value!.toString() : "null") + ", ");
+    buffer.write("name=" + "$_name");
     buffer.write("}");
     
     return buffer.toString();
   }
   
-  CompanyModelCDGP copyWith({String? id, String? name, double? value, List<StockModelCDGP>? StockModelCDGPS}) {
+  CompanyModelCDGP copyWith({String? id, double? value, String? name}) {
     return CompanyModelCDGP(
       id: id ?? this.id,
-      name: name ?? this.name,
       value: value ?? this.value,
-      StockModelCDGPS: StockModelCDGPS ?? this.StockModelCDGPS);
+      name: name ?? this.name);
   }
   
   CompanyModelCDGP.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _name = json['name'],
       _value = (json['value'] as num?)?.toDouble(),
-      _StockModelCDGPS = json['StockModelCDGPS'] is List
-        ? (json['StockModelCDGPS'] as List)
-          .where((e) => e?['serializedData'] != null)
-          .map((e) => StockModelCDGP.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
-          .toList()
-        : null;
+      _name = json['name'];
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'value': _value, 'StockModelCDGPS': _StockModelCDGPS?.map((StockModelCDGP? e) => e?.toJson()).toList()
+    'id': id, 'value': _value, 'name': _name
   };
 
   static final QueryField ID = QueryField(fieldName: "companyModelCDGP.id");
-  static final QueryField NAME = QueryField(fieldName: "name");
   static final QueryField VALUE = QueryField(fieldName: "value");
-  static final QueryField STOCKMODELCDGPS = QueryField(
-    fieldName: "StockModelCDGPS",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: (StockModelCDGP).toString()));
+  static final QueryField NAME = QueryField(fieldName: "name");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "CompanyModelCDGP";
     modelSchemaDefinition.pluralName = "CompanyModelCDGPS";
@@ -141,22 +122,15 @@ class CompanyModelCDGP extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: CompanyModelCDGP.NAME,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: CompanyModelCDGP.VALUE,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.double)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
-      key: CompanyModelCDGP.STOCKMODELCDGPS,
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: CompanyModelCDGP.NAME,
       isRequired: false,
-      ofModelName: (StockModelCDGP).toString(),
-      associatedKey: StockModelCDGP.COMPANYMODELCDGPID
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
   });
 }
