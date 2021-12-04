@@ -6,30 +6,30 @@ import 'package:flutter/material.dart';
 import 'amplifyconfiguration.dart';
 import 'models/ModelProvider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-void doSomething() async {
+Future<void> setupApi() async {
   AmplifyAPI apiPlugin = AmplifyAPI();
   AmplifyDataStore datastorePlugin = AmplifyDataStore(
     modelProvider: ModelProvider.instance,
   );
-  // AmplifyStorageS3 amplifyStorageS3 = AmplifyStorageS3();
   Amplify.addPlugins([
     datastorePlugin,
-    // amplifyStorageS3,
     apiPlugin,
   ]);
-  // Once Plugins are added, configure Amplify
-  // Note: Amplify can only be configured once.
   try {
     await Amplify.configure(amplifyconfig);
   } catch (e) {
     print(
         "Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
   }
-  final item = UntitledModel(
-      isComplete: false);
+}
+
+void main() {
+  runApp(const MyApp());
+}
+
+void doSomething() async {
+  final item = CompanyModel(
+      name: "Tesla lui Elon Musca", value: 69.420666);
   await Amplify.DataStore.save(item);
 }
 class MyApp extends StatelessWidget {
@@ -78,6 +78,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  void initState() {
+    super.initState();
+    setupApi();
+  }
+
   void _incrementCounter() {
     doSomething();
     setState(() {
