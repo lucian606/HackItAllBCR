@@ -21,14 +21,19 @@
 
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
 import 'CompanyModel.dart';
+import 'CompanyModelCDGP.dart';
+import 'StockModelCDGP.dart';
+import 'package:http/http.dart';
 
 export 'CompanyModel.dart';
+export 'CompanyModelCDGP.dart';
+export 'StockModelCDGP.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "61e3b3baa778c5b2ec743dfbbbe4ab62";
+  String version = "14ace5d922f182558a19e540a570ea15";
   @override
-  List<ModelSchema> modelSchemas = [CompanyModel.schema];
+  List<ModelSchema> modelSchemas = [CompanyModel.schema, CompanyModelCDGP.schema, StockModelCDGP.schema];
   static final ModelProvider _instance = ModelProvider();
 
   static ModelProvider get instance => _instance;
@@ -37,6 +42,14 @@ class ModelProvider implements ModelProviderInterface {
     switch(modelName) {
     case "CompanyModel": {
     return CompanyModel.classType;
+    }
+    break;
+    case "CompanyModelCDGP": {
+    return CompanyModelCDGP.classType;
+    }
+    break;
+    case "StockModelCDGP": {
+    return StockModelCDGP.classType;
     }
     break;
     default: {

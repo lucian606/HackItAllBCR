@@ -19,18 +19,20 @@
 
 // ignore_for_file: public_member_api_docs, file_names, unnecessary_new, prefer_if_null_operators, prefer_const_constructors, slash_for_doc_comments, annotate_overrides, non_constant_identifier_names, unnecessary_string_interpolations, prefer_adjacent_string_concatenation, unnecessary_const, dead_code
 
+import 'ModelProvider.dart';
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 
-/** This is an auto generated class representing the CompanyModel type in your schema. */
+/** This is an auto generated class representing the CompanyModelCDGP type in your schema. */
 @immutable
-class CompanyModel extends Model {
-  static const classType = const _CompanyModelModelType();
+class CompanyModelCDGP extends Model {
+  static const classType = const _CompanyModelCDGPModelType();
   final String id;
   final String? _name;
-  final String? _currency;
-  final String? _ceEchipaSunteti;
+  final double? _value;
+  final List<StockModelCDGP>? _StockModelCDGPS;
 
   @override
   getInstanceType() => classType;
@@ -44,22 +46,22 @@ class CompanyModel extends Model {
     return _name;
   }
   
-  String? get currency {
-    return _currency;
+  double? get value {
+    return _value;
   }
   
-  String? get ceEchipaSunteti {
-    return _ceEchipaSunteti;
+  List<StockModelCDGP>? get StockModelCDGPS {
+    return _StockModelCDGPS;
   }
   
-  const CompanyModel._internal({required this.id, name, currency, ceEchipaSunteti}): _name = name, _currency = currency, _ceEchipaSunteti = ceEchipaSunteti;
+  const CompanyModelCDGP._internal({required this.id, name, value, StockModelCDGPS}): _name = name, _value = value, _StockModelCDGPS = StockModelCDGPS;
   
-  factory CompanyModel({String? id, String? name, String? currency, String? ceEchipaSunteti}) {
-    return CompanyModel._internal(
+  factory CompanyModelCDGP({String? id, String? name, double? value, List<StockModelCDGP>? StockModelCDGPS}) {
+    return CompanyModelCDGP._internal(
       id: id == null ? UUID.getUUID() : id,
       name: name,
-      currency: currency,
-      ceEchipaSunteti: ceEchipaSunteti);
+      value: value,
+      StockModelCDGPS: StockModelCDGPS != null ? List<StockModelCDGP>.unmodifiable(StockModelCDGPS) : StockModelCDGPS);
   }
   
   bool equals(Object other) {
@@ -69,11 +71,11 @@ class CompanyModel extends Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is CompanyModel &&
+    return other is CompanyModelCDGP &&
       id == other.id &&
       _name == other._name &&
-      _currency == other._currency &&
-      _ceEchipaSunteti == other._ceEchipaSunteti;
+      _value == other._value &&
+      DeepCollectionEquality().equals(_StockModelCDGPS, other._StockModelCDGPS);
   }
   
   @override
@@ -83,41 +85,47 @@ class CompanyModel extends Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("CompanyModel {");
+    buffer.write("CompanyModelCDGP {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("name=" + "$_name" + ", ");
-    buffer.write("currency=" + "$_currency" + ", ");
-    buffer.write("ceEchipaSunteti=" + "$_ceEchipaSunteti");
+    buffer.write("value=" + (_value != null ? _value!.toString() : "null"));
     buffer.write("}");
     
     return buffer.toString();
   }
   
-  CompanyModel copyWith({String? id, String? name, String? currency, String? ceEchipaSunteti}) {
-    return CompanyModel(
+  CompanyModelCDGP copyWith({String? id, String? name, double? value, List<StockModelCDGP>? StockModelCDGPS}) {
+    return CompanyModelCDGP(
       id: id ?? this.id,
       name: name ?? this.name,
-      currency: currency ?? this.currency,
-      ceEchipaSunteti: ceEchipaSunteti ?? this.ceEchipaSunteti);
+      value: value ?? this.value,
+      StockModelCDGPS: StockModelCDGPS ?? this.StockModelCDGPS);
   }
   
-  CompanyModel.fromJson(Map<String, dynamic> json)  
+  CompanyModelCDGP.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _name = json['name'],
-      _currency = json['currency'],
-      _ceEchipaSunteti = json['ceEchipaSunteti'];
+      _value = (json['value'] as num?)?.toDouble(),
+      _StockModelCDGPS = json['StockModelCDGPS'] is List
+        ? (json['StockModelCDGPS'] as List)
+          .where((e) => e?['serializedData'] != null)
+          .map((e) => StockModelCDGP.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
+          .toList()
+        : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'currency': _currency, 'ceEchipaSunteti': _ceEchipaSunteti
+    'id': id, 'name': _name, 'value': _value, 'StockModelCDGPS': _StockModelCDGPS?.map((StockModelCDGP? e) => e?.toJson()).toList()
   };
 
-  static final QueryField ID = QueryField(fieldName: "companyModel.id");
+  static final QueryField ID = QueryField(fieldName: "companyModelCDGP.id");
   static final QueryField NAME = QueryField(fieldName: "name");
-  static final QueryField CURRENCY = QueryField(fieldName: "currency");
-  static final QueryField CEECHIPASUNTETI = QueryField(fieldName: "ceEchipaSunteti");
+  static final QueryField VALUE = QueryField(fieldName: "value");
+  static final QueryField STOCKMODELCDGPS = QueryField(
+    fieldName: "StockModelCDGPS",
+    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: (StockModelCDGP).toString()));
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "CompanyModel";
-    modelSchemaDefinition.pluralName = "CompanyModels";
+    modelSchemaDefinition.name = "CompanyModelCDGP";
+    modelSchemaDefinition.pluralName = "CompanyModelCDGPS";
     
     modelSchemaDefinition.authRules = [
       AuthRule(
@@ -133,30 +141,31 @@ class CompanyModel extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: CompanyModel.NAME,
+      key: CompanyModelCDGP.NAME,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: CompanyModel.CURRENCY,
+      key: CompanyModelCDGP.VALUE,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: ModelFieldType(ModelFieldTypeEnum.double)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: CompanyModel.CEECHIPASUNTETI,
+    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+      key: CompanyModelCDGP.STOCKMODELCDGPS,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofModelName: (StockModelCDGP).toString(),
+      associatedKey: StockModelCDGP.COMPANYMODELCDGPID
     ));
   });
 }
 
-class _CompanyModelModelType extends ModelType<CompanyModel> {
-  const _CompanyModelModelType();
+class _CompanyModelCDGPModelType extends ModelType<CompanyModelCDGP> {
+  const _CompanyModelCDGPModelType();
   
   @override
-  CompanyModel fromJson(Map<String, dynamic> jsonData) {
-    return CompanyModel.fromJson(jsonData);
+  CompanyModelCDGP fromJson(Map<String, dynamic> jsonData) {
+    return CompanyModelCDGP.fromJson(jsonData);
   }
 }

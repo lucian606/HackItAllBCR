@@ -28,7 +28,7 @@ void main() {
 }
 
 void doSomething() async {
-  final item = CompanyModel(
+  final item = CompanyModelCDGP(
       name: "Tesla lui Elon Musca", value: 69.420666);
   await Amplify.DataStore.save(item);
 }
