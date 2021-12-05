@@ -9,11 +9,6 @@ class TrendingProvider {
     this.region = region;
   }
 
-  Future<List> doQuery()
-  async {
-
-    var url =
-    Uri.http('54.195.17.145:3000', '/trending', {'region':region} );
   Future<List> doQuery() async {
     var url = Uri.http('54.195.17.145:3000', '/trending', {'region': region});
     Map<String, String> requestHeaders = {

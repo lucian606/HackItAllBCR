@@ -17,28 +17,37 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<dynamic> stockList = [];
+  List<dynamic> trendingStocks = [];
 
   searchResultList(String stock) async {
     List<dynamic> resultsList = [];
     if (_searchController.text != "") {
       resultsList = await AutocompleteProvider().doQuery(stock);
     } else {
-      await TrendingProvider().doQuery().then((trendingStocksJsons) {
-          resultsList =
-              trendingStocksJsons.map((json) => Company(symbol: json["symbol"], name: json["symbol"]) ).toList();
-
+      await TrendingProvider("US").doQuery().then((trendingStocksJsons) {
+        resultsList = trendingStocksJsons
+            .map(
+                (json) => Company(symbol: json["symbol"], name: json["symbol"]))
+            .toList();
       });
     }
-      setState(() {
-        stockList = resultsList;
-      });
+    setState(() {
+      stockList = resultsList;
+    });
   }
-  List<dynamic> stockList = [];
-  List<dynamic> trendingStocks = [];
 
   @override
   void initState() {
     super.initState();
+    TrendingProvider('US').doQuery().then((trendingStocksJsons) {
+      setState(() {
+        trendingStocks = trendingStocksJsons
+            .map(
+                (json) => Company(symbol: json["symbol"], name: json["symbol"]))
+            .toList();
+        stockList = trendingStocks;
+      });
+    });
   }
 
   @override
