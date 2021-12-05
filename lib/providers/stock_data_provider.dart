@@ -4,11 +4,7 @@ import 'package:http/http.dart' as http;
 
 class StockDataProvider {
 
-  String range = '1mo';
-  String region = 'US';
-  String interval = '1d';
-
-  Future<StockData> doQuery(String stock)
+  Future<StockData> doQuery(String stock,{ String range = '1mo', String region = 'US',String interval = '1d'} )
   async {
     final queryParameters = {
       'range': range,

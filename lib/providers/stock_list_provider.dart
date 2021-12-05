@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class TrendingProvider {
-  String region = 'US';
+
+  String region="US";
 
   TrendingProvider(String region) {
     this.region = region;
