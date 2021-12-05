@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:quiver/iterables.dart';
 import 'package:tuple/tuple.dart';
@@ -47,7 +46,11 @@ class StockData
     final List<dynamic> opens = json['indicators']['quote'][0]['open'];
     final List<dynamic> closes = json['indicators']['quote'][0]['close'];
 
-    final List<StockEntry> entries = zip([timestamps,lows,highs,opens,closes]).map((item) => StockEntry(item[0], item[1], item[2], item[3], item[4])).cast<StockEntry>().toList();
+    final List<StockEntry> entries = zip([timestamps,lows,highs,opens,closes]).map((item) => StockEntry(item[0],
+        double.parse(item[1].toString()),
+        double.parse(item[2].toString()),
+        double.parse(item[3].toString()),
+        double.parse(item[4].toString()) ) ).cast<StockEntry>().toList();
 
     return StockData(
         currency: json['meta']['currency'],

@@ -32,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   prefixIcon: IconButton(
                     icon: const Icon(Icons.search),
                     onPressed: () {
+
                       var rng = Random();
                       int n = rng.nextInt(10) + 5;
                       stockList.clear();

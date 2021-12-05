@@ -1,11 +1,9 @@
-import 'package:amplify_datastore/amplify_datastore.dart';
-import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
-import 'amplifyconfiguration.dart';
 import 'package:http/http.dart' as http;
 
 import 'screens/search_screen.dart';
-import 'dart:convert' as convert;
+import 'providers/stock_data_provider.dart';
+import 'providers/stock_list_provider.dart';
 
 Future<void> doRequest() async {
   var url =
@@ -22,15 +20,17 @@ Future<void> doRequest() async {
   }
 }
 
-void main() {
+void main() async{
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+
+      StockDataProvider().doQuery("AAPL");
       return const MaterialApp(
         home: SearchScreen(),
     );
