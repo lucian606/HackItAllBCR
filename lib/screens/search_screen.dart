@@ -103,8 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => StockScreen(
-                                message: "meow from stock: " +
-                                    stockList[index].symbol)));
+                                message: stockList[index].symbol)));
                       },
                       icon: const Icon(
                         Icons.trending_up,
