@@ -160,7 +160,7 @@ class _StockScreenState extends State<StockScreen> {
                       DropdownButton(
                           value: interval,
                           onChanged: ((String? newValue) async {
-                            if(newValue!.contains('m'))
+                            if(newValue!.contains('5'))
                                 range='1mo';
                             var aux = await StockDataProvider().doQuery(widget.message,region: region,range: range,interval: newValue);
                             setState(() {
@@ -172,7 +172,7 @@ class _StockScreenState extends State<StockScreen> {
                       DropdownButton(
                           value: range,
                           onChanged: ((String? newValue) async {
-                            if(newValue!.contains('mo') || newValue.contains('y'))
+                            if((newValue!.contains('mo') || newValue.contains('y')) && interval.contains('5'))
                               interval='1d';
 
                             var aux = await StockDataProvider().doQuery(widget.message,region: region,range: newValue,interval: interval);
