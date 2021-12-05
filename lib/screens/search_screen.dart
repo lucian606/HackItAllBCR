@@ -19,13 +19,6 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    TrendingProvider('US').doQuery().then( (trendingStocksJsons) {
-        setState(() {
-          trendingStocks = trendingStocksJsons.map((json) => json["symbol"]).toList();
-          stockList = trendingStocks;
-        });
-    });
-
   }
 
   @override
