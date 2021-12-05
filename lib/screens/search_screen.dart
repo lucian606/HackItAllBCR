@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../providers/stock_list_provider.dart';
 import 'stock_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -12,7 +13,20 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<int> stockList = [];
+  List<dynamic> stockList = [];
+  List<dynamic> trendingStocks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    TrendingProvider('US').doQuery().then( (trendingStocksJsons) {
+        setState(() {
+          trendingStocks = trendingStocksJsons.map((json) => json["symbol"]).toList();
+          stockList = trendingStocks;
+        });
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +78,13 @@ class _SearchScreenState extends State<SearchScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                         side: BorderSide(
-                          color: Colors.grey.withOpacity(0.0),
+                          color: Colors.grey.withOpacity(1),
                           width: 2,
                         ),
                       ),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                        leading: IconButton(
+                        trailing: IconButton(
                           onPressed: () {
                             Navigator.of(contex).push(
                                 MaterialPageRoute(builder: (context) => StockScreen(message: "meow from stock: " + stockList[index].toString())));},
@@ -81,13 +95,13 @@ class _SearchScreenState extends State<SearchScreen> {
                           tooltip: 'Show Chart',
                         ),
                         title: Text(
-                          "STOCK " + stockList[index].toString(),
+                          stockList[index],
                           style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
                         ),
                         subtitle: Row(
                           children: <Widget>[
                             const Icon(IconData(0xe11b, fontFamily: 'MaterialIcons'), color: Colors.blue),
-                            Text( stockList[index].toString(), style: const TextStyle(color: Colors.black54,fontWeight:FontWeight.bold))
+                            Text( index.toString(), style: const TextStyle(color: Colors.black54,fontWeight:FontWeight.bold))
                           ],
                         ),
                       )

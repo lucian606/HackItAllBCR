@@ -6,7 +6,11 @@ import 'dart:convert';
 class TrendingProvider {
   String region = 'US';
 
-  Future<void> doQuery()
+  TrendingProvider(String region) {
+    this.region = region;
+  }
+
+  Future<List> doQuery()
   async {
 
     var url =
@@ -19,11 +23,12 @@ class TrendingProvider {
 
     final json = jsonDecode(response.body);
     final results = List.from(json["finance"]["result"][0]["quotes"]);
+    return results;
   }
 }
 
 class AutocompleteProvider {
-  Future<void> doQuery(String query)
+  Future<List> doQuery(String query)
   async {
 
     final queryParameters = {
@@ -41,6 +46,6 @@ class AutocompleteProvider {
     var response = await http.get(url, headers: requestHeaders);
 
     final json = jsonDecode(response.body);
-    final results = List.from(json["ResultSet"]["Result"]);
+    return List.from(json["ResultSet"]["Result"]);
   }
 }

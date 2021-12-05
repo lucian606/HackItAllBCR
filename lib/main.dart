@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-      StockDataProvider().doQuery("AAPL");
+    AutocompleteProvider().doQuery("AAPL");
       return const MaterialApp(
         home: SearchScreen(),
     );
