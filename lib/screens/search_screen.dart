@@ -15,16 +15,22 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  List<Company> stockList = [];
+  List<dynamic> stockList = [];
 
   searchResultList(String stock) async {
-    List<Company> resultsList = [];
+    List<dynamic> resultsList = [];
     if (_searchController.text != "") {
-     resultsList = await AutocompleteProvider().doQuery(stock);
+      resultsList = await AutocompleteProvider().doQuery(stock);
+    } else {
+      await TrendingProvider().doQuery().then((trendingStocksJsons) {
+          resultsList =
+              trendingStocksJsons.map((json) => Company(symbol: json["symbol"], name: json["symbol"]) ).toList();
+
+      });
     }
-    setState(() {
-      stockList = resultsList;
-    });
+      setState(() {
+        stockList = resultsList;
+      });
   }
 
   @override
