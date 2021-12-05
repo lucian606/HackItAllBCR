@@ -29,9 +29,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
-      StockDataProvider().doQuery("AAPL");
-      return const MaterialApp(
+     return const MaterialApp(
         home: SearchScreen(),
     );
   }
