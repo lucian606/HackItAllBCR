@@ -65,3 +65,17 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+/amplify/backend/types/amplify-dependent-resources-ref.d.ts
+/amplify/backend/backend-config.json
+/amplify/cli.json
+/amplify/backend/api/RedRevoRaise/cli-inputs.json
+/amplify/backend/api/RedRevoRaise/stacks/CustomResources.json
+/lib/models/ModelProvider.dart
+/amplify/backend/api/RedRevoRaise/parameters.json
+/amplify/.config/project-config.json
+/amplify/backend/api/RedRevoRaise/resolvers/README.md
+/amplify/hooks/README.md
+/amplify/backend/api/RedRevoRaise/schema.graphql
+/amplify/team-provider-info.json
+/amplify/backend/api/RedRevoRaise/transform.conf.json
+/lib/models/UntitledModel.dart
