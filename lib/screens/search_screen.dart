@@ -92,14 +92,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                     side: BorderSide(
-                      color: Colors.grey.withOpacity(0.0),
+                      color: Colors.grey.withOpacity(0.6),
                       width: 2,
                     ),
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 8.0),
-                    leading: IconButton(
+                    trailing: IconButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => StockScreen(
@@ -122,6 +122,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             IconData(0xe11b, fontFamily: 'MaterialIcons'),
                             color: Colors.blue),
                         Text(stockList[index].name,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 color: Colors.black54,
                                 fontWeight: FontWeight.bold))
